@@ -877,11 +877,13 @@ async function sendMessage() {
 document.getElementById('chatInput').addEventListener('keydown', function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
 
 function renderQuiz(cp) {
-  cp = cp || getCourseProgress(currentCourseId);
-  const list = document.getElementById('quizList');
-  if (!courseQuestions.length) { list.innerHTML = '<p style="color:#9ca3af;text-align:center;padding:20px">本课程暂无题目</p>'; return; }
+  try {
+    cp = cp || getCourseProgress(currentCourseId);
+    const list = document.getElementById('quizList');
+    console.log('renderQuiz called, courseQuestions:', courseQuestions);
+    if (!courseQuestions.length) { list.innerHTML = '<p style="color:#9ca3af;text-align:center;padding:20px">本课程暂无题目</p>'; return; }
 
-  list.innerHTML = courseQuestions.map(function(q, idx) {
+    list.innerHTML = courseQuestions.map(function(q, idx) {
     var submitted = cp.quizSubmitted && cp.quizSubmitted[q.id];
     var isMultiSelect = q.correctIndices && Array.isArray(q.correctIndices);
     var selectedAnswers = cp.quizAnswers ? cp.quizAnswers[q.id] : (isMultiSelect ? [] : undefined);
@@ -902,7 +904,7 @@ function renderQuiz(cp) {
       return '<button class="' + cls + '" id="opt-' + q.id + '-' + i + '" onclick="selectOption(' + q.id + ',' + i + ',' + (isMultiSelect ? 'true' : 'false') + ')" ' + disabled + '>' + String.fromCharCode(65+i) + '. ' + opt + '</button>';
     }).join('');
 
-    var submitDisabled = (!submitted && (isMultiSelect ? (selectedAnswers.length === 0) : (selectedAnswers === undefined))) ? 'disabled' : '';
+    var submitDisabled = (!submitted && (isMultiSelect ? (!selectedAnswers || selectedAnswers.length === 0) : (selectedAnswers === undefined))) ? 'disabled' : '';
     var submitStyle = submitted ? 'display:none' : '';
     var correctText = correctIndices.map(idx => String.fromCharCode(65+idx)).join('、');
 
@@ -913,6 +915,10 @@ function renderQuiz(cp) {
       '<p class="quiz-result" id="result-' + q.id + '" style="' + (submitted?'':'display:none') + '"></p>' +
     '</div>';
   }).join('');
+  } catch(e) {
+    console.error('renderQuiz error:', e);
+    document.getElementById('quizList').innerHTML = '<p style="color:red;text-align:center;padding:20px">加载题目出错: ' + e.message + '</p>';
+  }
 }
 
 function selectOption(qId, optIdx, isMultiSelect) {
@@ -1131,3 +1137,4 @@ if (document.getElementById('welcomeText') && currentUser) {
 </script>
 </body>
 </html>
+
