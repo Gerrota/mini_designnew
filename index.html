@@ -480,23 +480,23 @@ const ACCOUNTS = {
    teachers: [{ id: '198765', password: '167890', name: '李老师', role: 'teacher' }],
 };
 const COURSES = [
-  { id: 1, title: '"环城速递"：输送血液的泵——心脏', description: '本课程以初中生物学知识点"心脏的结构和功能"为核心，通过多媒体演示以及AI辅助学情分析工具，帮助学生理解心脏作为"血液输送泵"的生理机制。', image: 'https://ybu-cd-2025.netlify.app/assets/p.jpg', videoSrc: 'https://ybu-cd-2025.netlify.app/assets/v.mp4', subject: '生物', grade: '初中', emoji: '🫀' },
-  { id: 2, title: '全等三角形', description: '《全等三角形》选自人教版八年级数学上册第二章内容，旨在全面系统地向学生讲解三角形的其中一类——全等三角形的知识内容，深入而生动。', image: 'https://ybu-cd-2025.netlify.app/assets/Tri_Pic.jpg', videoSrc: 'https://ybu-cd-2025.netlify.app/assets/Tri_Vid.mp4', subject: '数学', grade: '初中', emoji: '📐' },
-  { id: 3, title: '马说', description: '《马说》选自人教版八年级语文下册第六单元内容，是唐代文学家韩愈创作的一篇论说文。这篇寓言性的短论抒发了封建社会中知识分子怀才不遇的感慨和悲愤。', image: 'https://ybu-cd-2025.netlify.app/assets/Hou_Pic.jpg', videoSrc: 'https://ybu-cd-2025.netlify.app/assets/Hou_Vid.mp4', subject: '语文', grade: '初中', emoji: '📜' },
+  { id: 1, title: '"食物特工队——肠道大闯关"', description: '本节课是人教版生物学七年级下册第四单元人体与生理健康中的第二章人体的营养中消化和吸收部分。聚焦营养物质如何被人体利用，是理解人体新陈代谢的关键节点。以"消化系统结构→消化过程→吸收场所"为逻辑主线，通过插图、资料分析等形式，将抽象的生理过程具象化，便于学生理解人体获取能量的核心机制。', image: '4月25日(3)-封面.jpg', videoSrc: '4月25日(3).mp4', subject: '生物', grade: '初中', emoji: '🍔' },
+  { id: 2, title: '勾股定理', description: '勾股定理选自人教版八年级下册，北师大版七年级上册第二章《探索勾股定理》。勾股定理指直角三角形两直角边平方和等于斜边平方（a²+b²=c²），中国古称商高定理，是数形结合的重要几何定理。', image: '勾股定理.png', videoSrc: 'https://ybu-cd-2025.netlify.app/assets/Tri_Vid.mp4', subject: '数学', grade: '初中', emoji: '📐' },
+  { id: 3, title: '邓稼先', description: '《邓稼先》选自人教版七年级语文下册第一单元内容，记录了"两弹一星"元勋邓稼先的生平事迹，展现了他为祖国国防事业无私奉献的精神。', image: '邓稼先.png', videoSrc: 'https://ybu-cd-2025.netlify.app/assets/Hou_Vid.mp4', subject: '语文', grade: '初中', emoji: '📜' },
 ];
 const QUESTIONS = [
-  { id: 1, courseId: 1, text: '心脏位于人体的哪个位置？', options: ['胸腔左侧', '胸腔中央偏左', '腹腔上部', '胸腔右侧'], correctIndex: 1 },
-  { id: 2, courseId: 1, text: '心脏有几个腔室？', options: ['2个', '3个', '4个', '5个'], correctIndex: 2 },
-  { id: 3, courseId: 1, text: '左心室的功能是什么？', options: ['接收肺静脉血液', '将血液泵入肺循环', '将血液泵入体循环', '接收体静脉血液'], correctIndex: 2 },
+  { id: 1, courseId: 1, text: '下列属于消化腺的是？（ ）', options: ['食道', '胰腺', '大肠'], correctIndex: 1 },
+  { id: 2, courseId: 1, text: '下列营养物质中，需要被消化分解后才能吸收的有（）（多选）', options: ['淀粉', '蛋白质', '脂肪', '维生素'], correctIndices: [0, 1, 2] },
+  { id: 3, courseId: 1, text: '人体消化和吸收营养物质的主要场所是（）', options: ['大肠', '胃', '小肠'], correctIndex: 2 },
   { id: 4, courseId: 2, text: '两个三角形全等的条件不包括以下哪项？', options: ['三边对应相等(SSS)', '两角一边对应相等(AAS)', '两边一角对应相等(SSA)', '两边夹角对应相等(SAS)'], correctIndex: 2 },
   { id: 5, courseId: 2, text: '全等三角形的对应角之间的关系是？', options: ['互补', '互余', '相等', '成比例'], correctIndex: 2 },
   { id: 6, courseId: 3, text: '《马说》的作者是谁？', options: ['柳宗元', '欧阳修', '韩愈', '苏轼'], correctIndex: 2 },
   { id: 7, courseId: 3, text: '"千里马常有，而伯乐不常有"这句话的含义是？', options: ['好马很多，识马的人很少', '人才常有，但能识别人才的人不多', '马的数量多于人', '伯乐比千里马更珍贵'], correctIndex: 1 },
 ];
 const STUDENTS = [
-  { name: '李华', studentId: '19988776655', courses: [{ title: '心脏', score: 92, timeSpent: '45分钟', questionsCorrect: 3, questionsTotal: 3 }, { title: '全等三角形', score: 78, timeSpent: '38分钟', questionsCorrect: 2, questionsTotal: 3 }, { title: '马说', score: 65, timeSpent: '30分钟', questionsCorrect: 1, questionsTotal: 2 }], aiSuggestion: '该学生在生物学科表现优秀，数学和语文有待加强，建议多做练习题巩固基础知识。' },
-  { name: '张晓华', studentId: '122334456', courses: [{ title: '心脏', score: 88, timeSpent: '50分钟', questionsCorrect: 3, questionsTotal: 3 }, { title: '全等三角形', score: 95, timeSpent: '42分钟', questionsCorrect: 3, questionsTotal: 3 }, { title: '马说', score: 72, timeSpent: '35分钟', questionsCorrect: 1, questionsTotal: 2 }], aiSuggestion: '该学生数学能力突出，生物基础扎实，语文理解能力需要进一步提升。' },
-  { name: '宋丹', studentId: '122334457', courses: [{ title: '心脏', score: 75, timeSpent: '40分钟', questionsCorrect: 2, questionsTotal: 3 }, { title: '全等三角形', score: 82, timeSpent: '45分钟', questionsCorrect: 2, questionsTotal: 3 }, { title: '马说', score: 90, timeSpent: '55分钟', questionsCorrect: 2, questionsTotal: 2 }], aiSuggestion: '该学生语文素养较高，理科学习需要加强，建议结合实验和图示辅助理解。' },
+  { name: '李华', studentId: '19988776655', courses: [{ title: '肠道', score: 92, timeSpent: '45分钟', questionsCorrect: 3, questionsTotal: 3 }, { title: '勾股定理', score: 78, timeSpent: '38分钟', questionsCorrect: 2, questionsTotal: 3 }, { title: '邓稼先', score: 65, timeSpent: '30分钟', questionsCorrect: 1, questionsTotal: 2 }], aiSuggestion: '该学生在生物学科表现优秀，数学和语文有待加强，建议多做练习题巩固基础知识。' },
+  { name: '张晓华', studentId: '122334456', courses: [{ title: '肠道', score: 88, timeSpent: '50分钟', questionsCorrect: 3, questionsTotal: 3 }, { title: '勾股定理', score: 95, timeSpent: '42分钟', questionsCorrect: 3, questionsTotal: 3 }, { title: '邓稼先', score: 72, timeSpent: '35分钟', questionsCorrect: 1, questionsTotal: 2 }], aiSuggestion: '该学生数学能力突出，生物基础扎实，语文理解能力需要进一步提升。' },
+  { name: '宋丹', studentId: '122334457', courses: [{ title: '肠道', score: 75, timeSpent: '40分钟', questionsCorrect: 2, questionsTotal: 3 }, { title: '勾股定理', score: 82, timeSpent: '45分钟', questionsCorrect: 2, questionsTotal: 3 }, { title: '邓稼先', score: 90, timeSpent: '55分钟', questionsCorrect: 2, questionsTotal: 2 }], aiSuggestion: '该学生语文素养较高，理科学习需要加强，建议结合实验和图示辅助理解。' },
 ];
 const COLORS = { '生物': { bg: '#d1fae5', text: '#065f46' }, '数学': { bg: '#eef2ff', text: '#4338ca' }, '语文': { bg: '#fef3c7', text: '#92400e' } };
 const PROG_COLORS = { '生物': '#10b981', '数学': '#6366f1', '语文': '#f59e0b' };
@@ -659,8 +659,12 @@ function loadLearning(courseId) {
     updateLearningProgressUI();
   };
 
-  // 定义弹出题目的时间点（百分比）
-  const questionTimePoints = [0.1, 0.3, 0.5, 0.7];
+  // 定义每个课程的弹出题目时间点（秒数），null表示不弹出
+  const courseQuestionTimes = {
+    1: [116, null, 269], // 肠道大作战：第1题116秒弹出，第2题不弹出，第3题269秒弹出
+  };
+  // 默认百分比时间点（其他课程使用）
+  const defaultTimePoints = [0.1, 0.3, 0.5, 0.7];
   let questionsShown = [];
 
   video.ontimeupdate = function() {
@@ -676,10 +680,13 @@ function loadLearning(courseId) {
         updateLearningProgressUI();
       }
 
+      // 获取当前课程的时间点配置
+      const timePoints = courseQuestionTimes[courseId] || defaultTimePoints.map(p => p * video.duration);
+
       // 检查是否到达弹出题目的时间点
-      for (let i = 0; i < questionTimePoints.length; i++) {
-        const timePoint = questionTimePoints[i];
-        if (pct >= timePoint && pct < timePoint + 0.02 && !questionsShown.includes(i)) {
+      for (let i = 0; i < timePoints.length; i++) {
+        const timePoint = timePoints[i];
+        if (timePoint && video.currentTime >= timePoint && video.currentTime < timePoint + 2 && !questionsShown.includes(i)) {
           questionsShown.push(i);
           video.pause(); // 暂停视频
           showQuestionPopup(i); // 弹出题目
@@ -876,62 +883,98 @@ function renderQuiz(cp) {
 
   list.innerHTML = courseQuestions.map(function(q, idx) {
     var submitted = cp.quizSubmitted && cp.quizSubmitted[q.id];
-    var selectedIdx = cp.quizAnswers ? cp.quizAnswers[q.id] : undefined;
+    var isMultiSelect = q.correctIndices && Array.isArray(q.correctIndices);
+    var selectedAnswers = cp.quizAnswers ? cp.quizAnswers[q.id] : (isMultiSelect ? [] : undefined);
+    var correctIndices = isMultiSelect ? q.correctIndices : [q.correctIndex];
+
     var optionsHtml = q.options.map(function(opt, i) {
       var cls = 'quiz-option';
       var disabled = '';
+      var isSelected = isMultiSelect ? (selectedAnswers && selectedAnswers.includes(i)) : (selectedAnswers === i);
       if (submitted) {
         disabled = 'disabled';
-        if (i === q.correctIndex) cls += ' correct';
-        else if (i === selectedIdx) cls += ' wrong';
+        if (correctIndices.includes(i)) cls += ' correct';
+        else if (isSelected) cls += ' wrong';
         else cls += ' dimmed';
-      } else if (i === selectedIdx) {
+      } else if (isSelected) {
         cls += ' selected';
       }
-      return '<button class="' + cls + '" id="opt-' + q.id + '-' + i + '" onclick="selectOption(' + q.id + ',' + i + ',' + q.correctIndex + ')" ' + disabled + '>' + String.fromCharCode(65+i) + '. ' + opt + '</button>';
+      return '<button class="' + cls + '" id="opt-' + q.id + '-' + i + '" onclick="selectOption(' + q.id + ',' + i + ',' + (isMultiSelect ? 'true' : 'false') + ')" ' + disabled + '>' + String.fromCharCode(65+i) + '. ' + opt + '</button>';
     }).join('');
 
-    var resultHtml = '';
-    if (submitted) {
-      var isCorrect = selectedIdx === q.correctIndex;
-      resultHtml = '<p class="quiz-result ' + (isCorrect?'correct-text':'wrong-text') + '">' +
-        (isCorrect ? '✓ 回答正确！' : '✗ 回答错误，正确答案是 ' + String.fromCharCode(65+q.correctIndex)) + '</p>';
-    }
-
-    var submitDisabled = (!submitted && selectedIdx === undefined) ? 'disabled' : '';
+    var submitDisabled = (!submitted && (isMultiSelect ? (selectedAnswers.length === 0) : (selectedAnswers === undefined))) ? 'disabled' : '';
     var submitStyle = submitted ? 'display:none' : '';
+    var correctText = correctIndices.map(idx => String.fromCharCode(65+idx)).join('、');
 
     return '<div class="quiz-item" id="quiz-' + q.id + '">' +
-      '<p class="quiz-question">' + (idx+1) + '. ' + q.text + '</p>' +
+      '<p class="quiz-question">' + (idx+1) + '. ' + q.text + (isMultiSelect ? '（多选）' : '') + '</p>' +
       '<div class="quiz-options">' + optionsHtml + '</div>' +
-      '<button class="btn-submit-quiz" id="submit-' + q.id + '" onclick="submitAnswer(' + q.id + ',' + q.correctIndex + ')" ' + submitDisabled + ' style="' + submitStyle + '">提交答案</button>' +
-      '<p class="quiz-result" id="result-' + q.id + '" style="' + (submitted?'':'display:none') + '">' + (submitted ? (selectedIdx===q.correctIndex?'✓ 回答正确！':'✗ 回答错误，正确答案是 '+String.fromCharCode(65+q.correctIndex)) : '') + '</p>' +
+      '<button class="btn-submit-quiz" id="submit-' + q.id + '" onclick="submitAnswer(' + q.id + ',' + (isMultiSelect ? 'true' : 'false') + ')" ' + submitDisabled + ' style="' + submitStyle + '">提交答案</button>' +
+      '<p class="quiz-result" id="result-' + q.id + '" style="' + (submitted?'':'display:none') + '"></p>' +
     '</div>';
   }).join('');
 }
 
-function selectOption(qId, optIdx, correctIdx) {
+function selectOption(qId, optIdx, isMultiSelect) {
   var cp = getCourseProgress(currentCourseId);
   if (cp.quizSubmitted && cp.quizSubmitted[qId]) return;
   if (!cp.quizAnswers) cp.quizAnswers = {};
-  cp.quizAnswers[qId] = optIdx;
+
+  var q = courseQuestions.find(function(q){return q.id===qId;});
+  var currentAnswer = cp.quizAnswers[qId];
+
+  if (isMultiSelect) {
+    // 多选题：切换选择状态
+    if (!Array.isArray(currentAnswer)) currentAnswer = [];
+    var idx = currentAnswer.indexOf(optIdx);
+    if (idx > -1) {
+      currentAnswer.splice(idx, 1); // 取消选择
+    } else {
+      currentAnswer.push(optIdx); // 添加选择
+    }
+    cp.quizAnswers[qId] = currentAnswer;
+  } else {
+    // 单选题：直接替换
+    cp.quizAnswers[qId] = optIdx;
+  }
+
   var all = loadProgress(); all[currentCourseId] = cp; saveProgress(all);
 
-  courseQuestions.find(function(q){return q.id===qId;}).options.forEach(function(_,i) {
+  // 更新UI
+  q.options.forEach(function(_,i) {
     var btn = document.getElementById('opt-'+qId+'-'+i);
-    if (btn) btn.className = 'quiz-option' + (i===optIdx?' selected':'');
+    if (!btn) return;
+    var isSelected = isMultiSelect ? (cp.quizAnswers[qId].includes(i)) : (cp.quizAnswers[qId] === i);
+    btn.className = 'quiz-option' + (isSelected?' selected':'');
   });
+
   var submitBtn = document.getElementById('submit-'+qId);
-  if (submitBtn) submitBtn.disabled = false;
+  if (submitBtn) {
+    var hasAnswer = isMultiSelect ? (cp.quizAnswers[qId].length > 0) : (cp.quizAnswers[qId] !== undefined);
+    submitBtn.disabled = !hasAnswer;
+  }
 }
 
-function submitAnswer(qId, correctIdx) {
+function submitAnswer(qId, isMultiSelect) {
   var cp = getCourseProgress(currentCourseId);
-  if (!cp.quizAnswers || cp.quizAnswers[qId] === undefined) return;
+  var q = courseQuestions.find(function(q){return q.id===qId;});
+  if (!q) return;
+
+  var correctIndices = isMultiSelect ? q.correctIndices : [q.correctIndex];
+  var selected = cp.quizAnswers ? cp.quizAnswers[qId] : (isMultiSelect ? [] : undefined);
+
+  if (isMultiSelect ? (selected.length === 0) : (selected === undefined)) return;
   if (cp.quizSubmitted && cp.quizSubmitted[qId]) return;
 
-  var selected = cp.quizAnswers[qId];
-  var isCorrect = selected === correctIdx;
+  // 验证答案
+  var isCorrect;
+  if (isMultiSelect) {
+    var userSorted = selected.slice().sort(function(a,b){return a-b;});
+    var correctSorted = correctIndices.slice().sort(function(a,b){return a-b;});
+    isCorrect = JSON.stringify(userSorted) === JSON.stringify(correctSorted);
+  } else {
+    isCorrect = selected === q.correctIndex;
+  }
 
   if (!cp.quizSubmitted) cp.quizSubmitted = {};
   cp.quizSubmitted[qId] = true;
@@ -943,24 +986,36 @@ function submitAnswer(qId, correctIdx) {
 
   var all = loadProgress(); all[currentCourseId] = cp; saveProgress(all);
 
-  courseQuestions.find(function(q){return q.id===qId;}).options.forEach(function(_,i) {
+  // 更新选项样式
+  q.options.forEach(function(_,i) {
     var btn = document.getElementById('opt-'+qId+'-'+i);
     if (!btn) return;
-    btn.className = 'quiz-option ' + (i===correctIdx?'correct':i===selected?'wrong':'dimmed');
+    var isSelected = isMultiSelect ? selected.includes(i) : (i === selected);
+    var isCorrectOpt = correctIndices.includes(i);
+    if (isCorrectOpt) {
+      btn.className = 'quiz-option correct';
+    } else if (isSelected) {
+      btn.className = 'quiz-option wrong';
+    } else {
+      btn.className = 'quiz-option dimmed';
+    }
     btn.disabled = true;
   });
+
   var submitBtn = document.getElementById('submit-'+qId);
   if (submitBtn) submitBtn.style.display = 'none';
+
+  var correctText = correctIndices.map(idx => String.fromCharCode(65+idx)).join('、');
   var resultEl = document.getElementById('result-'+qId);
   if (resultEl) {
     resultEl.style.display = 'block';
     resultEl.className = 'quiz-result ' + (isCorrect?'correct-text':'wrong-text');
-    resultEl.textContent = isCorrect ? '✓ 回答正确！' : '✗ 回答错误，正确答案是 ' + String.fromCharCode(65+correctIdx);
+    resultEl.textContent = isCorrect ? '✓ 回答正确！' : '✗ 回答错误，正确答案是 ' + correctText;
   }
 
   updateLearningProgressUI();
   if (isCorrect) showToast('✓ 回答正确！继续加油！');
-  else showToast('✗ 答错了，正确答案是 ' + String.fromCharCode(65+correctIdx));
+  else showToast('✗ 答错了，正确答案是 ' + correctText);
 }
 
 function renderMyLearning() {
