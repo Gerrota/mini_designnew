@@ -312,7 +312,7 @@
           </div>
           <div class="learning-progress-bar-wrap">
             <div class="learning-progress-label">
-              <span>综合学习进度（视频60% + 答题40%）</span>
+              <span>答题进度</span>
               <span id="totalProgressPct">0%</span>
             </div>
             <div class="progress-bar"><div class="progress-fill" id="totalProgressBar" style="width:0%;background:#6366f1"></div></div>
@@ -364,7 +364,7 @@
       <button class="btn-danger" onclick="openModal('resetModal')">🔄 重置所有进度</button>
     </div>
     <div class="stats-grid" id="myStatsGrid">
-      <div class="stat-card"><div class="stat-icon" style="background:#eef2ff">📚</div><div><div class="stat-big">3</div><div class="stat-desc">已学课程</div></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#eef2ff">📚</div><div><div class="stat-big">3</div><div class="stat-desc">已学课程</div></div></div> #
       <div class="stat-card"><div class="stat-icon" style="background:#f0fdf4">📈</div><div><div class="stat-big" id="myAvgScore">--</div><div class="stat-desc">平均分</div></div></div>
       <div class="stat-card"><div class="stat-icon" style="background:#fffbeb">📊</div><div><div class="stat-big" id="myAvgProgress">0%</div><div class="stat-desc">平均进度</div></div></div>
       <div class="stat-card"><div class="stat-icon" style="background:#fef2f2">✅</div><div><div class="stat-big" id="myCorrectRate">--%</div><div class="stat-desc">答题正确率</div></div></div>
@@ -480,9 +480,9 @@ const ACCOUNTS = {
    teachers: [{ id: '198765', password: '167890', name: '李老师', role: 'teacher' }],
 };
 const COURSES = [
-  { id: 1, title: '"食物特工队——肠道大闯关"', description: '本节课是人教版生物学七年级下册第四单元人体与生理健康中的第二章人体的营养中消化和吸收部分。聚焦营养物质如何被人体利用，是理解人体新陈代谢的关键节点。以"消化系统结构→消化过程→吸收场所"为逻辑主线，通过插图、资料分析等形式，将抽象的生理过程具象化，便于学生理解人体获取能量的核心机制。', image: '4月25日(3)-封面.jpg', videoSrc: '1-1080p-72k.mp4', subject: '生物', grade: '初中', emoji: '🍔' },
-  { id: 2, title: '勾股定理', description: '勾股定理选自人教版八年级下册，北师大版七年级上册第二章《探索勾股定理》。勾股定理指直角三角形两直角边平方和等于斜边平方（a²+b²=c²），中国古称商高定理，是数形结合的重要几何定理。', image: '勾股定理.png', videoSrc: 'https://ybu-cd-2025.netlify.app/assets/Tri_Vid.mp4', subject: '数学', grade: '初中', emoji: '📐' },
-  { id: 3, title: '邓稼先', description: '《邓稼先》选自人教版七年级语文下册第一单元内容，记录了"两弹一星"元勋邓稼先的生平事迹，展现了他为祖国国防事业无私奉献的精神。', image: '邓稼先.png', videoSrc: 'https://ybu-cd-2025.netlify.app/assets/Hou_Vid.mp4', subject: '语文', grade: '初中', emoji: '📜' },
+  { id: 1, title: '"食物特工队——肠道大闯关"', description: '本节课是人教版生物学七年级下册第四单元人体与生理健康中的第二章人体的营养中消化和吸收部分。聚焦营养物质如何被人体利用，是理解人体新陈代谢的关键节点。以"消化系统结构→消化过程→吸收场所"为逻辑主线，通过插图、资料分析等形式，将抽象的生理过程具象化，便于学生理解人体获取能量的核心机制。', image: '4月25日(3)-封面.jpg', videoSrc: 'v1.mp4', subject: '生物', grade: '初中', emoji: '🍔' },
+  { id: 2, title: '勾股定理', description: '勾股定理选自人教版八年级下册，北师大版七年级上册第二章《探索勾股定理》。勾股定理指直角三角形两直角边平方和等于斜边平方（a²+b²=c²），中国古称商高定理，是数形结合的重要几何定理。', image: '勾股定理.png', videoSrc: 'https://www.bilibili.com/video/BV1SKXaYCEhc/', subject: '数学', grade: '初中', emoji: '📐' },
+  { id: 3, title: '邓稼先', description: '《邓稼先》选自人教版七年级语文下册第一单元内容，记录了"两弹一星"元勋邓稼先的生平事迹，展现了他为祖国国防事业无私奉献的精神。', image: '邓稼先.png', videoSrc: 'https://www.bilibili.com/video/BV1qc6BBqEoN/', subject: '语文', grade: '初中', emoji: '📜' },
 ];
 const QUESTIONS = [
   { id: 1, courseId: 1, text: '下列属于消化腺的是？（ ）', options: ['食道', '胰腺', '大肠'], correctIndex: 1 },
@@ -511,10 +511,14 @@ function getCourseProgress(courseId) {
   return all[courseId];
 }
 
-function calcTotalProgress(cp, totalQuestions) {
-  const videoPct = cp.videoProgress || 0;
+function calcTotalProgress(cp, totalQuestions, courseId) {
   const quizPct = totalQuestions > 0 ? (cp.quizTotal / totalQuestions) : 0;
-  return Math.round(videoPct * 60 + quizPct * 40);
+  // 课程1（肠道大作战）统计视频+答题，其他只统计答题
+  if (courseId === 1) {
+    const videoPct = cp.videoProgress || 0;
+    return Math.round(videoPct * 60 + quizPct * 40);
+  }
+  return Math.round(quizPct * 100);
 }
 
 function calcScore(cp) {
@@ -590,7 +594,7 @@ function renderCourses(filter) {
   var progList = COURSES.map(function(c) {
     var cp = allProgress[c.id] || { videoProgress: 0, quizTotal: 0 };
     var qs = QUESTIONS.filter(function(q) { return q.courseId === c.id; }).length;
-    return calcTotalProgress(cp, qs);
+    return calcTotalProgress(cp, qs, c.id);
   });
   var avgProg = Math.round(progList.reduce(function(a,b){return a+b;},0) / COURSES.length);
   document.getElementById('bannerAvgProgress').textContent = avgProg + '%';
@@ -603,7 +607,7 @@ function renderCourses(filter) {
   document.getElementById('courseGrid').innerHTML = list.map(function(c) {
     var cp = allProgress[c.id] || { videoProgress: 0, quizTotal: 0 };
     var qs = QUESTIONS.filter(function(q) { return q.courseId === c.id; }).length;
-    var totalProg = calcTotalProgress(cp, qs);
+    var totalProg = calcTotalProgress(cp, qs, c.id);
     var tagHtml = totalProg >= 100
       ? '<span class="progress-tag done">✓ 已完成</span>'
       : totalProg > 0
@@ -648,16 +652,35 @@ function loadLearning(courseId) {
   courseQuestions = QUESTIONS.filter(q => q.courseId === courseId);
 
   const video = document.getElementById('courseVideo');
-  video.src = course.videoSrc;
-  video.load();
-
-  video.onloadedmetadata = function() {
-    updateVideoTime();
-    if (cp.videoProgress > 0 && cp.videoProgress < 0.99) {
-      video.currentTime = video.duration * cp.videoProgress;
+  const videoWrap = document.querySelector('.video-wrap');
+  
+  // 检查是否是B站链接
+  const isBilibili = course.videoSrc.includes('bilibili.com');
+  if (isBilibili) {
+    // 提取BV号
+    const bvMatch = course.videoSrc.match(/BV[\w]+/);
+    const bvid = bvMatch ? bvMatch[0] : '';
+    if (bvid) {
+      // 使用iframe嵌入B站播放器
+      videoWrap.innerHTML = `<iframe id="courseVideo" src="https://player.bilibili.com/player.html?bvid=${bvid}&page=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%;height:100%;min-height:400px;"></iframe>`;
     }
-    updateLearningProgressUI();
-  };
+  } else {
+    // 恢复原video标签
+    videoWrap.innerHTML = '<video id="courseVideo" controls class="course-video" preload="metadata">您的浏览器不支持 HTML5 视频。</video>';
+    const newVideo = document.getElementById('courseVideo');
+    newVideo.src = course.videoSrc;
+    newVideo.load();
+  }
+
+  if (!isBilibili) {
+    video.onloadedmetadata = function() {
+      updateVideoTime();
+      if (cp.videoProgress > 0 && cp.videoProgress < 0.99) {
+        video.currentTime = video.duration * cp.videoProgress;
+      }
+      updateLearningProgressUI();
+    };
+  }
 
   // 定义每个课程的弹出题目时间点（秒数），null表示不弹出
   const courseQuestionTimes = {
@@ -667,34 +690,36 @@ function loadLearning(courseId) {
   const defaultTimePoints = [0.1, 0.3, 0.5, 0.7];
   let questionsShown = [];
 
-  video.ontimeupdate = function() {
-    updateVideoTime();
-    if (video.duration && video.duration > 0) {
-      var pct = video.currentTime / video.duration;
-      var allData = loadProgress();
-      var cpData = getCourseProgress(courseId);
-      if (pct > (cpData.videoProgress || 0)) {
-        cpData.videoProgress = pct;
-        allData[courseId] = cpData;
-        saveProgress(allData);
-        updateLearningProgressUI();
-      }
+  if (!isBilibili) {
+    video.ontimeupdate = function() {
+      updateVideoTime();
+      if (video.duration && video.duration > 0) {
+        var pct = video.currentTime / video.duration;
+        var allData = loadProgress();
+        var cpData = getCourseProgress(courseId);
+        if (pct > (cpData.videoProgress || 0)) {
+          cpData.videoProgress = pct;
+          allData[courseId] = cpData;
+          saveProgress(allData);
+          updateLearningProgressUI();
+        }
 
-      // 获取当前课程的时间点配置
-      const timePoints = courseQuestionTimes[courseId] || defaultTimePoints.map(p => p * video.duration);
+        // 获取当前课程的时间点配置
+        const timePoints = courseQuestionTimes[courseId] || defaultTimePoints.map(p => p * video.duration);
 
-      // 检查是否到达弹出题目的时间点
-      for (let i = 0; i < timePoints.length; i++) {
-        const timePoint = timePoints[i];
-        if (timePoint && video.currentTime >= timePoint && video.currentTime < timePoint + 2 && !questionsShown.includes(i)) {
-          questionsShown.push(i);
-          video.pause(); // 暂停视频
-          showQuestionPopup(i); // 弹出题目
-          break;
+        // 检查是否到达弹出题目的时间点
+        for (let i = 0; i < timePoints.length; i++) {
+          const timePoint = timePoints[i];
+          if (timePoint && video.currentTime >= timePoint && video.currentTime < timePoint + 2 && !questionsShown.includes(i)) {
+            questionsShown.push(i);
+            video.pause(); // 暂停视频
+            showQuestionPopup(i); // 弹出题目
+            break;
+          }
         }
       }
-    }
-  };
+    };
+  }
 
   document.getElementById('chatMessages').innerHTML =
     '<div class="chat-msg ai"><div class="chat-avatar ai-avatar">🤖</div><div class="chat-bubble ai-bubble">您好！我是AI学习助手，已通过安全后端连接，有问题可以直接问我！</div></div>';
@@ -794,18 +819,31 @@ function loadLearning(courseId) {
 
 function updateLearningProgressUI() {
   var cp = getCourseProgress(currentCourseId);
-  var totalProg = calcTotalProgress(cp, courseQuestions.length);
+  var totalProg = calcTotalProgress(cp, courseQuestions.length, currentCourseId);
   document.getElementById('totalProgressPct').textContent = totalProg + '%';
   document.getElementById('totalProgressBar').style.width = totalProg + '%';
+
+  // 根据课程动态修改进度标签
+  var labelSpan = document.querySelector('.learning-progress-label span:first-child');
+  if (currentCourseId === 1) {
+    labelSpan.textContent = '综合学习进度（视频60% + 答题40%）';
+  } else {
+    labelSpan.textContent = '答题进度';
+  }
 
   var tag = document.getElementById('learningProgressTag');
   if (totalProg >= 100) { tag.className = 'progress-tag done'; tag.textContent = '✓ 已完成'; }
   else if (totalProg > 0) { tag.className = 'progress-tag ongoing'; tag.textContent = '进行中 ' + totalProg + '%'; }
   else { tag.className = 'progress-tag new'; tag.textContent = '未开始'; }
 
-  var video = document.getElementById('courseVideo');
-  var videoPct = cp.videoProgress || 0;
-  document.getElementById('videoProgressInfo').textContent = '视频进度：' + Math.round(videoPct * 100) + '%';
+  // 检查是否是B站视频
+  var course = COURSES.find(c => c.id === currentCourseId);
+  var isBilibili = course && course.videoSrc.includes('bilibili.com');
+  
+  if (!isBilibili) {
+    var videoPct = cp.videoProgress || 0;
+    document.getElementById('videoProgressInfo').textContent = '视频进度：' + Math.round(videoPct * 100) + '%';
+  }
 
   var done = cp.quizTotal || 0;
   document.getElementById('answeredCount').textContent = done;
@@ -1031,7 +1069,7 @@ function renderMyLearning() {
   COURSES.forEach(function(c) {
     var cp = allProgress[c.id] || { videoProgress: 0, quizTotal: 0, quizCorrect: 0 };
     var qs = QUESTIONS.filter(function(q){return q.courseId===c.id;}).length;
-    totalProg += calcTotalProgress(cp, qs);
+    totalProg += calcTotalProgress(cp, qs, c.id);
     totalCorrect += (cp.quizCorrect || 0);
     totalAnswered += (cp.quizTotal || 0);
     if (cp.score !== null && cp.score !== undefined) scores.push(cp.score);
@@ -1044,7 +1082,7 @@ function renderMyLearning() {
   document.getElementById('myProgressList').innerHTML = COURSES.map(function(c) {
     var cp = allProgress[c.id] || { videoProgress: 0, quizTotal: 0 };
     var qs = QUESTIONS.filter(function(q){return q.courseId===c.id;}).length;
-    var prog = calcTotalProgress(cp, qs);
+    var prog = calcTotalProgress(cp, qs, c.id);
     var color = PROG_COLORS[c.subject];
     return '<div class="progress-row">' +
       '<div style="display:flex;justify-content:space-between;font-size:13px;color:#374151;margin-bottom:6px">' +
@@ -1137,5 +1175,3 @@ if (document.getElementById('welcomeText') && currentUser) {
 </script>
 </body>
 </html>
-
-
