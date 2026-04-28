@@ -629,7 +629,7 @@ function renderCourses(filter) {
         '<div class="progress-bar"><div class="progress-fill" style="width:' + totalProg + '%;background:' + PROG_COLORS[c.subject] + '"></div></div>' +
         '<button class="btn-start">' + (totalProg > 0 ? '▶ 继续学习' : '▶ 开始学习') + '</button>' +
       '</div>' +
-    '</div>';
+    '</div>';//deepseek生成
   }).join('');
 }
 
@@ -673,10 +673,11 @@ function loadLearning(courseId) {
   }
 
   if (!isBilibili) {
-    video.onloadedmetadata = function() {
+    const newVideo = document.getElementById('courseVideo');
+    newVideo.onloadedmetadata = function() {
       updateVideoTime();
       if (cp.videoProgress > 0 && cp.videoProgress < 0.99) {
-        video.currentTime = video.duration * cp.videoProgress;
+        newVideo.currentTime = newVideo.duration * cp.videoProgress;
       }
       updateLearningProgressUI();
     };
@@ -691,10 +692,11 @@ function loadLearning(courseId) {
   let questionsShown = [];
 
   if (!isBilibili) {
-    video.ontimeupdate = function() {
+    const localVideo = document.getElementById('courseVideo');
+    localVideo.ontimeupdate = function() {
       updateVideoTime();
-      if (video.duration && video.duration > 0) {
-        var pct = video.currentTime / video.duration;
+      if (localVideo.duration && localVideo.duration > 0) {
+        var pct = localVideo.currentTime / localVideo.duration;
         var allData = loadProgress();
         var cpData = getCourseProgress(courseId);
         if (pct > (cpData.videoProgress || 0)) {
@@ -705,14 +707,14 @@ function loadLearning(courseId) {
         }
 
         // 获取当前课程的时间点配置
-        const timePoints = courseQuestionTimes[courseId] || defaultTimePoints.map(p => p * video.duration);
+        const timePoints = courseQuestionTimes[courseId] || defaultTimePoints.map(p => p * localVideo.duration);
 
         // 检查是否到达弹出题目的时间点
         for (let i = 0; i < timePoints.length; i++) {
           const timePoint = timePoints[i];
-          if (timePoint && video.currentTime >= timePoint && video.currentTime < timePoint + 2 && !questionsShown.includes(i)) {
+          if (timePoint && localVideo.currentTime >= timePoint && localVideo.currentTime < timePoint + 2 && !questionsShown.includes(i)) {
             questionsShown.push(i);
-            video.pause(); // 暂停视频
+            localVideo.pause(); // 暂停视频
             showQuestionPopup(i); // 弹出题目
             break;
           }
@@ -815,7 +817,7 @@ function loadLearning(courseId) {
       video.play();
     };
   }
-}
+}//deepseek生成
 
 function updateLearningProgressUI() {
   var cp = getCourseProgress(currentCourseId);
@@ -1119,7 +1121,7 @@ function renderMyLearning() {
       '<div class="stat-row"><span class="stat-row-label">答对题数</span><div class="stat-row-bar"><div class="progress-bar"><div class="progress-fill" style="width:' + (totalAnswered>0?Math.round(totalCorrect/totalAnswered*100):0) + '%;background:#10b981"></div></div></div><span class="stat-row-val" style="color:#10b981">' + totalCorrect + '题</span></div>' +
       '<div class="stat-row"><span class="stat-row-label">答错题数</span><div class="stat-row-bar"><div class="progress-bar"><div class="progress-fill" style="width:' + (totalAnswered>0?Math.round(wrongCount/totalAnswered*100):0) + '%;background:#ef4444"></div></div></div><span class="stat-row-val" style="color:#ef4444">' + wrongCount + '题</span></div>' +
       '<div class="stat-row"><span class="stat-row-label">已答题数</span><div class="stat-row-bar"><div class="progress-bar"><div class="progress-fill" style="width:100%;background:#6366f1"></div></div></div><span class="stat-row-val" style="color:#6366f1">' + totalAnswered + '题</span></div>' +
-    '</div>';
+    '</div>';//DEEPSEEK生成
 }
 
 function scoreColor(s) { return s>=90?'#10b981':s>=75?'#f59e0b':'#ef4444'; }
